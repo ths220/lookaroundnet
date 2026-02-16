@@ -46,6 +46,7 @@ def filter_and_resample(eeg, sampling_rate, target_sfreq, high_pass, low_pass, n
 def get_labels(file_path, n_samples, sampling_rate, block_size):
     # Read annotation files
     seizures = pd.read_csv(os.path.splitext(file_path)[0] + ".csv_bi", comment='#')
+    seizures = seizures[seizures['label'] != 'bckg']
 
     targets = np.zeros(n_samples)
     indices = {'sz': [], 'non_sz': [], 'mixed': []}
